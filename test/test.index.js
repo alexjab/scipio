@@ -87,18 +87,21 @@ describe ('index.js', function () {
     });
   });
 
-  describe ('Scipio.parser ()', function () {
+  describe ('Scipio._parser ()', function () {
     var title = bulk.string ();
     var paragraph = bulk.string ();
     var body = '<html><body><h1>'+title+'</h1><p id="paragraph">'+paragraph+'</p></body></html>';
-    var data = scipio._parser (null, body, {statusCode: 200});
-    var $ = data[0], body_ = data[1];
+    var data = scipio._parser (null, {statusCode: 200}, body);
+    var $ = data[0], body_ = data[1], response_ = data[2];
     it ('should return the body (default behavior)', function () {
       body_.should.equal (body);
     });
     it ('should return a $ selector (default behavior)', function () {
       $ ('h1').text ().should.equal (title);
       $ ('#paragraph').text ().should.equal (paragraph);
+    });
+    it ('should return a response object (default behavior)', function () {
+      response_.should.have.property ('statusCode', 200);
     });
   });
 
@@ -110,7 +113,7 @@ describe ('index.js', function () {
     var stuff = bulk.string ();
     var shiny = bulk.string ();
     var muddy = bulk.string ();
-    var fn = function (error_, body_, response_) {
+    var fn = function (error_, response_, body_) {
       return [thingy, stuff, shiny, muddy];
     };
     var scipio = new Scipio ();

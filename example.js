@@ -4,6 +4,7 @@ var scipio = new Scipio ();
 
 scipio.setHeaders ({'User-Agent': 'My Awesome UserAgent'});
 
+// Using ifconfig.me, which is neat but often a bit slow.
 scipio.get ('http://ifconfig.me/ip', function ($, body) {
   if (body)
     console.log ('My IP address: ', body);

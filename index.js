@@ -27,20 +27,20 @@ Scipio.prototype.fromBody = function (body, callback) {
 
 Scipio.prototype.get = function (url, callback) {
   this.request.get ({url: url, headers: this.headers}, function (error, response, body) {
-    callback.apply (this, this._parser (error, body, response));
+    callback.apply (this, this._parser (error, response, body));
   }.bind (this));
   return this;
 };
 Scipio.prototype.fromUrl = Scipio.prototype.get;
 
-Scipio.prototype._parser = function (error, body, response) {
+Scipio.prototype._parser = function (error, response, body) {
   var $;
   try {
     $ = cheerio.load (body);
   } catch (e) {
     null;
   }
-  return [$, body];
+  return [$, body, response];
 };
 
 Scipio.prototype.use = function (fn) {
