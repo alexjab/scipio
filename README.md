@@ -1,6 +1,8 @@
 Scipio
 ======
 
+[![NPM version](https://badge.fury.io/js/scipio.svg)](http://badge.fury.io/js/scipio)
+
 A small web scraper
 
 Scipio uses [request](https://github.com/mikeal/request) and [cheerio](https://github.com/cheeriojs/cheerio) to retrieve pages and parse them.
@@ -9,7 +11,7 @@ License: MIT.
 
 ##Example
 ```
-var Scipio = require ('index.js');
+var Scipio = require ('scipio');
 var scipio = new Scipio ();
 
 scipio.get ('http://example.org', function ($, body) {
